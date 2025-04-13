@@ -1,0 +1,11 @@
+CREATE TABLE `post_media` (
+    id CHAR(36) PRIMARY KEY,
+    post_id CHAR(36) NOT NULL,
+    media_url TEXT NOT NULL,
+    media_type ENUM('image', 'video') NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted ENUM('ACTIVE', 'DELETED') DEFAULT 'ACTIVE',
+
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
+);

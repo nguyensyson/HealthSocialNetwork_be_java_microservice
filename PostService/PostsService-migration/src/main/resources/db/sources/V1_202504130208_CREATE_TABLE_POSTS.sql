@@ -1,0 +1,11 @@
+CREATE TABLE `posts` (
+     id CHAR(36) PRIMARY KEY,
+     user_id CHAR(36) NOT NULL,
+     content TEXT,
+     parent_post_id CHAR(36),
+     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+     deleted ENUM('ACTIVE', 'DELETED') DEFAULT 'ACTIVE',
+
+     FOREIGN KEY (parent_post_id) REFERENCES posts(id) ON DELETE SET NULL
+);
