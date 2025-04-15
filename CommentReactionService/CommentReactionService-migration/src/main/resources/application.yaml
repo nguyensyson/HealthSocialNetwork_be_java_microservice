@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: PostsService-migration
+  datasource:
+    url: jdbc:mysql://localhost:3306/health_social_interaction
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/changelog.xml
+server:
+  port: 8090

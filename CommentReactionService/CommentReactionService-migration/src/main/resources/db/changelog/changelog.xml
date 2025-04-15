@@ -1,0 +1,11 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="son.nguyen" id="V1_202504152211_CREATE_TABLE_COMMENTS" onValidationFail="MARK_RAN">
+        <sqlFile dbms="mysql" path="classpath:/db/sources/V1_202504152211_CREATE_TABLE_COMMENTS.sql" relativeToChangelogFile="false"/>
+    </changeSet>
+
+    <changeSet author="son.nguyen" id="V1_202504152215_CREATE_TABLE_REACTIONS" onValidationFail="MARK_RAN">
+        <sqlFile dbms="mysql" path="classpath:/db/sources/V1_202504152215_CREATE_TABLE_REACTIONS.sql" relativeToChangelogFile="false"/>
+    </changeSet>
+
+</databaseChangeLog>
