@@ -37,6 +37,11 @@
             <artifactId>mapstruct</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.sonns.business</groupId>
+            <artifactId>PostsService-business</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

@@ -43,6 +43,7 @@
         <lombok.version>1.18.30</lombok.version>
         <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
         <mysql.version>8.0.33</mysql.version>
+        <module.version>0.0.1-SNAPSHOT</module.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -89,6 +90,17 @@
                 <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sonns.business</groupId>
+                <artifactId>PostsService-business</artifactId>
+                <version>${module.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sonns.infratructures</groupId>
+                <artifactId>PostsService-infratructures</artifactId>
+                <version>${module.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

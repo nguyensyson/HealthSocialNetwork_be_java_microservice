@@ -1,5 +1,7 @@
 package com.sonns.application.controller;
 
+import com.sonns.business.dto.PostCreateRequest;
+import com.sonns.business.services.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,8 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class PostController {
 
+    private final PostsService postsService;
+
     @PostMapping
-    public ResponseEntity<String> createPost() {
+    public ResponseEntity<String> createPost(@RequestBody PostCreateRequest postRequest) {
+        postsService.createPost(postRequest);
         return ResponseEntity.ok("User registered successfully.");
     }
 
