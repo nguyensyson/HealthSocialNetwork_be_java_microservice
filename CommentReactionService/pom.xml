@@ -42,6 +42,7 @@
         <lombok.version>1.18.30</lombok.version>
         <spring-boot.version>3.4.4</spring-boot.version>
         <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
+        <module.version>0.0.1-SNAPSHOT</module.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -88,6 +89,17 @@
                 <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sonns.business</groupId>
+                <artifactId>CommentReactionService-business</artifactId>
+                <version>${module.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sonns.infratructures</groupId>
+                <artifactId>CommentReactionService-infratructures</artifactId>
+                <version>${module.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

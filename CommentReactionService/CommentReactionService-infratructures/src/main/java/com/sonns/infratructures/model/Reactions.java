@@ -28,7 +28,7 @@ public class Reactions {
 
     @ManyToOne
     @JoinColumn(name = "comment_id", referencedColumnName = "id")
-    private Comments commentsId;
+    private Comments commentId;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();

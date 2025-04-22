@@ -42,6 +42,14 @@
             <artifactId>hibernate-validator</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.sonns.business</groupId>
+            <artifactId>CommentReactionService-business</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sonns.infratructures</groupId>
+            <artifactId>CommentReactionService-infratructures</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

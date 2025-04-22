@@ -36,6 +36,11 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.sonns.business</groupId>
+            <artifactId>CommentReactionService-business</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

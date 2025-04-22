@@ -26,12 +26,15 @@ public class Comments {
     @Column(name = "user_id", nullable = false)
     private String userId;
 
+    @Column(name = "post_id", nullable = false)
+    private String postId;
+
     @ManyToOne
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private Comments parentId;
 
-    @OneToMany(mappedBy = "reactions", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Reactions> reactionsList;
+//    @OneToMany(mappedBy = "reactions", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Reactions> reactionsList;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();

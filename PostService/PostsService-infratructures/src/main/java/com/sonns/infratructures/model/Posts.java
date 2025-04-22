@@ -42,5 +42,4 @@ public class Posts {
 
     @Enumerated(EnumType.STRING)
     private DeletedStatus deleted = DeletedStatus.ACTIVE;
-
 }

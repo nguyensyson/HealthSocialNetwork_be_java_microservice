@@ -50,6 +50,10 @@
             <groupId>com.sonns.infratructures</groupId>
             <artifactId>PostsService-infratructures</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.sonns.common</groupId>
+            <artifactId>PostsService-common</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

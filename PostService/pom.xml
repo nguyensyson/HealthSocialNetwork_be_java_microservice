@@ -44,6 +44,7 @@
         <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
         <mysql.version>8.0.33</mysql.version>
         <module.version>0.0.1-SNAPSHOT</module.version>
+        <webflux.version>3.4.4</webflux.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -91,6 +92,11 @@
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-webflux</artifactId>
+                <version>${webflux.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.sonns.business</groupId>
@@ -100,6 +106,11 @@
             <dependency>
                 <groupId>com.sonns.infratructures</groupId>
                 <artifactId>PostsService-infratructures</artifactId>
+                <version>${module.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sonns.common</groupId>
+                <artifactId>PostsService-common</artifactId>
                 <version>${module.version}</version>
             </dependency>
         </dependencies>
