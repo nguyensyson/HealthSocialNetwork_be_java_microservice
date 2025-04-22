@@ -45,6 +45,7 @@
         <mysql.version>8.0.33</mysql.version>
         <module.version>0.0.1-SNAPSHOT</module.version>
         <webflux.version>3.4.4</webflux.version>
+        <cloudinary.version>1.34.0</cloudinary.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -96,6 +97,11 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-webflux</artifactId>
                 <version>${webflux.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cloudinary</groupId>
+                <artifactId>cloudinary-http44</artifactId>
+                <version>${cloudinary.version}</version>
             </dependency>
 
             <dependency>

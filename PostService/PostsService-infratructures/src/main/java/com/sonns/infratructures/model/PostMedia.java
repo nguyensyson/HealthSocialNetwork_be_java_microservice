@@ -1,10 +1,7 @@
 package com.sonns.infratructures.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -20,9 +17,8 @@ public class PostMedia {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @ManyToOne
-    @JoinColumn(name = "post_id", nullable = false)
-    private Posts post;
+    @Column(name = "post_id", nullable = false)
+    private String postId;
 
     @Column(name = "media_url", nullable = false)
     private String mediaUrl;

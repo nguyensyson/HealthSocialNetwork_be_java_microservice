@@ -19,8 +19,8 @@ public class PostController {
 
     private final PostsService postsService;
 
-    @PostMapping
-    public ResponseEntity<String> createPost(@RequestBody PostCreateRequest postRequest) {
+    @PostMapping(consumes = {"multipart/form-data"})
+    public ResponseEntity<String> createPost(@ModelAttribute PostCreateRequest postRequest) {
         postsService.createPost(postRequest);
         return ResponseEntity.ok("User registered successfully.");
     }

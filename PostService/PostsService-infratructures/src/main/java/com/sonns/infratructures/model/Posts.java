@@ -31,9 +31,6 @@ public class Posts {
     @JoinColumn(name = "parent_post_id", referencedColumnName = "id")
     private Posts parentPost;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PostMedia> mediaList;
-
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 

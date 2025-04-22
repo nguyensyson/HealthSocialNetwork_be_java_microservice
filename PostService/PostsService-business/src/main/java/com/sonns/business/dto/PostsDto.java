@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 public class PostsDto {
     private String id;
     private String content;
-    private Integer repost;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
