@@ -8,4 +8,8 @@
         <sqlFile dbms="mysql" path="classpath:/db/sources/V1_202504130222_CREATE_TABLE_POSTMEDIA.sql" relativeToChangelogFile="false"/>
     </changeSet>
 
+    <changeSet author="son.nguyen" id="V1_202504232147_ADD_COLUMN_NAME_MEDIA_POST_TABLE" onValidationFail="MARK_RAN">
+        <sqlFile dbms="mysql" path="classpath:/db/sources/V1_202504232147_ADD_COLUMN_NAME_MEDIA_POST_TABLE.sql" relativeToChangelogFile="false"/>
+    </changeSet>
+
 </databaseChangeLog>

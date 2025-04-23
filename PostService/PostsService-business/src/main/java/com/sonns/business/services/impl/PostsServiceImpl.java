@@ -1,21 +1,21 @@
 package com.sonns.business.services.impl;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
-import com.sonns.business.config.CloudinaryConfig;
 import com.sonns.business.dto.*;
+import com.sonns.business.dto.proxy.PostsProxyDto;
 import com.sonns.business.repo.PostMediaRepo;
 import com.sonns.business.repo.PostsRepo;
 import com.sonns.business.repo.ReactionCommentService;
 import com.sonns.business.services.PostsService;
+import com.sonns.business.services.UploadImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,44 +24,34 @@ public class PostsServiceImpl implements PostsService {
 
     private final PostsRepo postsRepo;
     private final ReactionCommentService reactionCommentService;
-    private final Cloudinary cloudinary;
     private final PostMediaRepo postMediaRepo;
+    private final UploadImageService uploadImageService;
 
     @Override
-    public void createPost(PostCreateRequest post) {
-        PostsDto dto = postsRepo.createPost(post);
+    @Transactional
+    public Boolean createPost(PostCreateRequest post) {
+        try {
+            PostsDto dto = postsRepo.createPost(post);
 
-        List<MultipartFile> files = post.getFiles();
-        if (files != null && !files.isEmpty()) {
-            for (MultipartFile file : files) {
-                String imageUrl = null;
-
-                try {
+            List<MultipartFile> files = post.getFiles();
+            if (files != null && !files.isEmpty()) {
+                for (MultipartFile file : files) {
+                    String imageUrl = null;
                     String nameImage = dto.getId() + "_" + file.getOriginalFilename();
-                    imageUrl = uploadImage(file, nameImage);
+                    imageUrl = uploadImageService.uploadImage(file, nameImage);
 
                     postMediaRepo.savePostMedia(PostMediaDto.builder()
                                     .postId(dto.getId())
+                                    .name(nameImage)
                                     .mediaUrl(imageUrl)
                                     .build());
 
-                } catch (IOException e) {
-                    throw new RuntimeException("Upload failed for one file", e);
                 }
-
             }
+        return true;
+        } catch (Exception e) {
+            return false;
         }
-    }
-
-    public String uploadImage(MultipartFile file, String customFileName) throws IOException {
-        String publicId = "HealthSocialNetwork/" + customFileName;
-
-        Map uploadResult = cloudinary.uploader().upload(file.getBytes(),
-                ObjectUtils.asMap(
-                        "resource_type", "auto",
-                        "public_id", publicId));
-
-        return uploadResult.get("secure_url").toString();
     }
 
     @Override
@@ -85,5 +75,58 @@ public class PostsServiceImpl implements PostsService {
                 .collect(Collectors.toList());
 
         return new PageImpl<>(responses, pageable, postsPage.getTotalElements());
+    }
+
+    @Override
+    @Transactional
+    public Boolean updatePost(String id, PostCreateRequest post) {
+        try {
+            PostsDto dto = postsRepo.getPostById(id);
+            List<PostMediaDto> currentMedias = dto.getMediaImages();
+
+            List<MultipartFile> uploadedFiles = post.getFiles();
+            List<String> uploadedFileNames = new ArrayList<>();
+
+            if (uploadedFiles != null && !uploadedFiles.isEmpty()) {
+                for (MultipartFile file : uploadedFiles) {
+                    String originalName = file.getOriginalFilename();
+                    String generatedName = dto.getId() + "_" + originalName;
+                    uploadedFileNames.add(generatedName);
+
+                    // Kiểm tra file đã tồn tại chưa
+                    boolean exists = currentMedias.stream()
+                            .anyMatch(media -> media.getMediaUrl() != null && media.getMediaUrl().contains(generatedName));
+
+                    if (!exists) {
+                        String imageUrl = uploadImageService.uploadImage(file, generatedName);
+
+                        postMediaRepo.savePostMedia(PostMediaDto.builder()
+                                .postId(dto.getId())
+                                .mediaUrl(imageUrl)
+                                .build());
+
+                    }
+                }
+            }
+
+            // Xoá ảnh không còn nằm trong danh sách file upload
+            for (PostMediaDto media : currentMedias) {
+                if (media.getMediaUrl() != null) {
+                    String mediaFileName = media.getMediaUrl().substring(media.getMediaUrl().lastIndexOf("/") + 1);
+                    if (!uploadedFileNames.contains(mediaFileName)) {
+                        // Xoá trên cloud
+                        uploadImageService.deleteImage(media.getMediaUrl());
+
+                        // Xoá khỏi DB
+//                        postMediaRepo.deletePostMedia(media.getId());
+                    }
+                }
+            }
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

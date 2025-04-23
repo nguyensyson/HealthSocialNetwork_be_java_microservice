@@ -20,6 +20,9 @@ public class PostMedia {
     @Column(name = "post_id", nullable = false)
     private String postId;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
     @Column(name = "media_url", nullable = false)
     private String mediaUrl;
 

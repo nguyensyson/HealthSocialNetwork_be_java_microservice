@@ -9,6 +9,9 @@ import com.sonns.infratructures.repository.PostMediaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Repository
 @RequiredArgsConstructor
 public class PostMediaRepoImpl implements PostMediaRepo {

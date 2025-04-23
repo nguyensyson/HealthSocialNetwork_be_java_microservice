@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public interface PostsService {
 
-    void createPost(PostCreateRequest post);
+    Boolean createPost(PostCreateRequest post);
     Page<PostsResponse> getPosts(int page, int size);
+    Boolean updatePost(String id, PostCreateRequest post);
 }

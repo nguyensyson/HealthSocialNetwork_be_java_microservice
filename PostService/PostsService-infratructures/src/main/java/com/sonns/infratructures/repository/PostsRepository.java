@@ -1,6 +1,6 @@
 package com.sonns.infratructures.repository;
 
-import com.sonns.business.dto.PostsProxyDto;
+import com.sonns.business.dto.proxy.PostsProxyDto;
 import com.sonns.infratructures.model.Posts;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

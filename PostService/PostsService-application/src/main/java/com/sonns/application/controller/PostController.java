@@ -6,11 +6,9 @@ import com.sonns.business.services.PostsService;
 import com.sonns.common.base.BaseResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/post")
@@ -21,12 +19,20 @@ public class PostController {
 
     @PostMapping(consumes = {"multipart/form-data"})
     public ResponseEntity<String> createPost(@ModelAttribute PostCreateRequest postRequest) {
-        postsService.createPost(postRequest);
-        return ResponseEntity.ok("User registered successfully.");
+        Boolean response = postsService.createPost(postRequest);
+        if (response) {
+            return ResponseEntity.ok("User registered successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to create post.");
+        }
     }
 
-    @PutMapping
-    public ResponseEntity<String> updatePost() {
+    @PutMapping(value = "/{postId}", consumes = {"multipart/form-data"})
+    public ResponseEntity<String> updatePost(
+            @PathVariable Long postId,
+            @ModelAttribute PostCreateRequest postRequest) {
+
         return ResponseEntity.ok("User updated successfully.");
     }
 

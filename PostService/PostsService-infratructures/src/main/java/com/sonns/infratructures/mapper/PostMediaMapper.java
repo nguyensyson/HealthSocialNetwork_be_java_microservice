@@ -7,4 +7,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface PostMediaMapper {
     PostMedia toEntity(PostMediaDto dto);
+    PostMediaDto toDto(PostMedia entity);
 }

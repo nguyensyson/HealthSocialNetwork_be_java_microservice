@@ -1,4 +1,4 @@
-package com.sonns.business.dto;
+package com.sonns.business.dto.proxy;
 
 import java.time.LocalDateTime;
 
