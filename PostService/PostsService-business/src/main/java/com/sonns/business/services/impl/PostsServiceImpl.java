@@ -104,7 +104,6 @@ public class PostsServiceImpl implements PostsService {
                                 .postId(dto.getId())
                                 .mediaUrl(imageUrl)
                                 .build());
-
                     }
                 }
             }
@@ -124,5 +123,10 @@ public class PostsServiceImpl implements PostsService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public PostDetailResponse getPostDetail(String id) {
+        return null;
     }
 }
