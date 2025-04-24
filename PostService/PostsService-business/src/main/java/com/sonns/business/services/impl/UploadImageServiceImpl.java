@@ -1,6 +1,7 @@
 package com.sonns.business.services.impl;
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.api.exceptions.ApiException;
 import com.cloudinary.utils.ObjectUtils;
 import com.sonns.business.services.UploadImageService;
 import lombok.RequiredArgsConstructor;
@@ -21,14 +22,14 @@ public class UploadImageServiceImpl implements UploadImageService {
         try {
             String publicId = "HealthSocialNetwork/" + customFileName;
 
-            Map uploadResult = cloudinary.uploader().upload(file.getBytes(),
+            Map<String, Object> uploadResult = cloudinary.uploader().upload(file.getBytes(),
                     ObjectUtils.asMap(
                             "resource_type", "auto",
                             "public_id", publicId));
 
             return uploadResult.get("secure_url").toString();
         } catch (IOException e) {
-            throw new RuntimeException("Failed to upload image to Cloudinary", e);
+            throw new IllegalStateException("Failed to upload image to Cloudinary", e);
         }
     }
 
@@ -43,13 +44,13 @@ public class UploadImageServiceImpl implements UploadImageService {
             String publicIdWithExtension = url.substring(index);
             String publicId = publicIdWithExtension.substring(0, publicIdWithExtension.lastIndexOf('.'));
 
-            Map result = cloudinary.uploader().destroy(publicId, ObjectUtils.asMap(
+            Map<String, Object> result = cloudinary.uploader().destroy(publicId, ObjectUtils.asMap(
                     "resource_type", "image"
             ));
 
             return result.get("result").toString();
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to delete image from Cloudinary", e);
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed to delete image from Cloudinary", e);
         }
     }
 }

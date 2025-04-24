@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,6 +18,7 @@ public class PostsResponse {
     private Integer likes;
     private Integer comments;
     private Integer repost;
+    private List<PostMediaDto> mediaImages;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

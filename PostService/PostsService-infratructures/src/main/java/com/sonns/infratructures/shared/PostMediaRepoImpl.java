@@ -33,4 +33,12 @@ public class PostMediaRepoImpl implements PostMediaRepo {
         postMedia.setDeleted(DeletedStatus.DELETED);
         postMediaRepository.save(postMedia);
     }
+
+    @Override
+    public List<PostMediaDto> getPostMediaByPosts(String id) {
+        List<PostMedia> postMedia = postMediaRepository.getPostMediaByPostId(id);
+        return postMedia.stream()
+                .map(postMediaMapper::toDto)
+                .collect(Collectors.toList());
+    }
 }

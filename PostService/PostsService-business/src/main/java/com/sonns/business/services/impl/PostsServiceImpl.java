@@ -62,12 +62,14 @@ public class PostsServiceImpl implements PostsService {
         List<PostsResponse> responses = postsPage.stream()
                 .map(post -> {
                     PostStatsResponse stats = reactionCommentService.getPostStats(post.getId()).block();
+                    List<PostMediaDto> postMediaDtos = postMediaRepo.getPostMediaByPosts(post.getId());
                     return PostsResponse.builder()
                             .id(post.getId())
                             .content(post.getContent())
                             .likes(stats.getLikeCount())
                             .comments(stats.getCommentCount())
                             .repost(post.getRepost())
+                            .mediaImages(postMediaDtos)
                             .createdAt(post.getCreatedAt())
                             .updatedAt(post.getUpdatedAt())
                             .build();
@@ -126,7 +128,7 @@ public class PostsServiceImpl implements PostsService {
     }
 
     @Override
-    public PostDetailResponse getPostDetail(String id) {
+    public PostsResponse getPostDetail(String id) {
         return null;
     }
 }

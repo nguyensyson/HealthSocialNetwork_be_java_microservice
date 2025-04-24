@@ -1,7 +1,6 @@
 package com.sonns.application.controller;
 
 import com.sonns.business.dto.PostCreateRequest;
-import com.sonns.business.dto.PostDetailResponse;
 import com.sonns.business.dto.PostsResponse;
 import com.sonns.business.services.PostsService;
 import com.sonns.common.base.BaseResponse;
@@ -57,8 +56,8 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BaseResponse<PostDetailResponse>> getPostById(@PathVariable String id) {
-        PostDetailResponse response = postsService.getPostDetail(id);
+    public ResponseEntity<BaseResponse<PostsResponse>> getPostById(@PathVariable String id) {
+        PostsResponse response = postsService.getPostDetail(id);
         return ResponseEntity.ok(BaseResponse.success(response));
     }
 }

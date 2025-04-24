@@ -9,4 +9,5 @@ import java.util.List;
 public interface PostMediaRepo {
     void savePostMedia(PostMediaDto postMedia);
     void deletePostMedia(String mediaId);
+    List<PostMediaDto> getPostMediaByPosts(String id);
 }

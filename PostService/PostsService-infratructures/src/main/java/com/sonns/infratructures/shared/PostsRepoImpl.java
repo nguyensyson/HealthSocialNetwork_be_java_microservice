@@ -36,8 +36,7 @@ public class PostsRepoImpl implements PostsRepo {
 
     @Override
     public Page<PostsProxyDto> getPosts(Pageable pageable) {
-        Page<PostsProxyDto> response = postsRepository.findAllPostsWithRepost(pageable);
-        return response;
+        return postsRepository.findAllPostsWithRepost(pageable);
     }
 
     @Override
