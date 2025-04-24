@@ -34,6 +34,22 @@ public class UploadImageServiceImpl implements UploadImageService {
 
     @Override
     public String deleteImage(String url) {
-        return "";
+        try {
+            int index = url.indexOf("HealthSocialNetwork/");
+            if (index == -1) {
+                throw new IllegalArgumentException("Invalid Cloudinary URL");
+            }
+
+            String publicIdWithExtension = url.substring(index);
+            String publicId = publicIdWithExtension.substring(0, publicIdWithExtension.lastIndexOf('.'));
+
+            Map result = cloudinary.uploader().destroy(publicId, ObjectUtils.asMap(
+                    "resource_type", "image"
+            ));
+
+            return result.get("result").toString();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete image from Cloudinary", e);
+        }
     }
 }

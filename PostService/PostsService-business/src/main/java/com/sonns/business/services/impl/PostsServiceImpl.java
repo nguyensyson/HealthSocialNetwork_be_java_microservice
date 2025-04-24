@@ -114,18 +114,14 @@ public class PostsServiceImpl implements PostsService {
                 if (media.getMediaUrl() != null) {
                     String mediaFileName = media.getMediaUrl().substring(media.getMediaUrl().lastIndexOf("/") + 1);
                     if (!uploadedFileNames.contains(mediaFileName)) {
-                        // Xoá trên cloud
                         uploadImageService.deleteImage(media.getMediaUrl());
-
-                        // Xoá khỏi DB
-//                        postMediaRepo.deletePostMedia(media.getId());
+                        postMediaRepo.deletePostMedia(media.getId());
                     }
                 }
             }
 
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }

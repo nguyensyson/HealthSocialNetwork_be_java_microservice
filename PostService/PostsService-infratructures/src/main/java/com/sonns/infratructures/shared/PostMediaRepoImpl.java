@@ -3,6 +3,7 @@ package com.sonns.infratructures.shared;
 import com.sonns.business.dto.PostMediaDto;
 import com.sonns.business.repo.PostMediaRepo;
 import com.sonns.infratructures.mapper.PostMediaMapper;
+import com.sonns.infratructures.model.DeletedStatus;
 import com.sonns.infratructures.model.MediaType;
 import com.sonns.infratructures.model.PostMedia;
 import com.sonns.infratructures.repository.PostMediaRepository;
@@ -23,6 +24,13 @@ public class PostMediaRepoImpl implements PostMediaRepo {
     public void savePostMedia(PostMediaDto dto) {
         PostMedia postMedia = postMediaMapper.toEntity(dto);
         postMedia.setMediaType(MediaType.image);
+        postMediaRepository.save(postMedia);
+    }
+
+    @Override
+    public void deletePostMedia(String mediaId) {
+        PostMedia postMedia = postMediaRepository.findById(mediaId).orElse(null);
+        postMedia.setDeleted(DeletedStatus.DELETED);
         postMediaRepository.save(postMedia);
     }
 }

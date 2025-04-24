@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface PostMediaRepo {
     void savePostMedia(PostMediaDto postMedia);
+    void deletePostMedia(String mediaId);
 }
