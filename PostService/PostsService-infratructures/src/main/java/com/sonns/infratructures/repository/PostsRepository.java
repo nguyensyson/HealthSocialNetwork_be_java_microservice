@@ -24,5 +24,16 @@ public interface PostsRepository extends JpaRepository<Posts, String> {
     """)
     Page<PostsProxyDto> findAllPostsWithRepost(Pageable pageable);
 
+    @Query("""
+        SELECT 
+            p.id AS id,
+            p.content AS content,
+            (SELECT COUNT(r) FROM Posts r WHERE r.parentPost.id = p.id) AS repost,
+            p.createdAt AS createdAt,
+            p.updatedAt AS updatedAt
+        FROM Posts p
+        WHERE p.deleted = 'ACTIVE' AND p.id = :postId
+    """)
+    PostsProxyDto getPostsDetail(String postId);
 
 }

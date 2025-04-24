@@ -12,4 +12,5 @@ public interface PostsRepo {
     PostsDto createPost(PostCreateRequest post);
     Page<PostsProxyDto> getPosts(Pageable pageable);
     PostsDto getPostById(String id);
+    PostsProxyDto getPostDetail(String id);
 }

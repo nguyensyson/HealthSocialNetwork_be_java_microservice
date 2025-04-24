@@ -109,7 +109,6 @@ public class PostsServiceImpl implements PostsService {
                     }
                 }
             }
-
             // Xoá ảnh không còn nằm trong danh sách file upload
             for (PostMediaDto media : currentMedias) {
                 if (media.getMediaUrl() != null) {
@@ -129,6 +128,18 @@ public class PostsServiceImpl implements PostsService {
 
     @Override
     public PostsResponse getPostDetail(String id) {
-        return null;
+        PostsProxyDto postDetail = postsRepo.getPostDetail(id);
+        PostStatsResponse stats = reactionCommentService.getPostStats(postDetail.getId()).block();
+        List<PostMediaDto> postMediaDtos = postMediaRepo.getPostMediaByPosts(postDetail.getId());
+        return PostsResponse.builder()
+                .id(postDetail.getId())
+                .content(postDetail.getContent())
+                .likes(stats.getLikeCount())
+                .comments(stats.getCommentCount())
+                .repost(postDetail.getRepost())
+                .mediaImages(postMediaDtos)
+                .createdAt(postDetail.getCreatedAt())
+                .updatedAt(postDetail.getUpdatedAt())
+                .build();
     }
 }

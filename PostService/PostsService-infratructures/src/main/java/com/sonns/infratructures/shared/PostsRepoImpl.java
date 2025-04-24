@@ -56,4 +56,9 @@ public class PostsRepoImpl implements PostsRepo {
                 .updatedAt(post.getUpdatedAt())
                 .build();
     }
+
+    @Override
+    public PostsProxyDto getPostDetail(String id) {
+        return postsRepository.getPostsDetail(id);
+    }
 }
