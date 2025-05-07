@@ -19,4 +19,10 @@ public class CommentsController {
         commentService.addComment(request);
         return ResponseEntity.ok("oke");
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> editComment(@PathVariable String id, @RequestBody AddCommentRequest request) {
+        commentService.addComment(request);
+        return ResponseEntity.ok("oke");
+    }
 }
