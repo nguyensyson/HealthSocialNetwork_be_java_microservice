@@ -22,7 +22,13 @@ public class CommentsController {
 
     @PutMapping("/{id}")
     public ResponseEntity<String> editComment(@PathVariable String id, @RequestBody AddCommentRequest request) {
-        commentService.addComment(request);
+        commentService.editComment(id, request);
+        return ResponseEntity.ok("oke");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteComment(@PathVariable String id) {
+        commentService.deleteComment(id);
         return ResponseEntity.ok("oke");
     }
 }

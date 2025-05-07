@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service;
 public interface CommentService {
     void addComment(AddCommentRequest comment);
     void editComment(String id, AddCommentRequest comment);
+    void deleteComment(String id);
 }

@@ -21,4 +21,9 @@ public class CommentServiceImpl implements CommentService {
     public void editComment(String id, AddCommentRequest comment) {
         commentsRepo.editComment(id, comment);
     }
+
+    @Override
+    public void deleteComment(String id) {
+        commentsRepo.deleteComment(id);
+    }
 }

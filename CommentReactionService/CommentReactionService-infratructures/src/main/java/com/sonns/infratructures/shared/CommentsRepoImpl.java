@@ -4,6 +4,7 @@ import com.sonns.business.dto.AddCommentRequest;
 import com.sonns.business.repo.CommentsRepo;
 import com.sonns.infratructures.mapper.CommentMapper;
 import com.sonns.infratructures.model.Comments;
+import com.sonns.infratructures.model.DeletedStatus;
 import com.sonns.infratructures.repository.CommentsResponsitory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -36,6 +37,13 @@ public class CommentsRepoImpl implements CommentsRepo {
     public void editComment(String id, AddCommentRequest comment) {
         Comments comments = commentsResponsitory.getById(id);
         comments.setContent(comment.getContent());
+        commentsResponsitory.save(comments);
+    }
+
+    @Override
+    public void deleteComment(String id) {
+        Comments comments = commentsResponsitory.getById(id);
+        comments.setDeleted(DeletedStatus.DELETED);
         commentsResponsitory.save(comments);
     }
 }
