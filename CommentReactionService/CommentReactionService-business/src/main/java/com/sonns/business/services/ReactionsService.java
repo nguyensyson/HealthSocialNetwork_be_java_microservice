@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface ReactionsService {
-    void updateReactions(ReactionRequest reactions);
+    void reactions(ReactionRequest reactions);
 }
