@@ -1,0 +1,11 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="son.nguyen" id="V1_202505181614_CREATE_TABLE_USERS" onValidationFail="MARK_RAN">
+        <sqlFile dbms="mysql" path="classpath:/db/sources/V1_202505181614_CREATE_TABLE_USERS.sql" relativeToChangelogFile="false"/>
+    </changeSet>
+
+    <changeSet author="son.nguyen" id="V1_202505181614_CREATE_TABLE_FOLLOWS" onValidationFail="MARK_RAN">
+        <sqlFile dbms="mysql" path="classpath:/db/sources/V1_202505181614_CREATE_TABLE_FOLLOWS.sql" relativeToChangelogFile="false"/>
+    </changeSet>
+
+</databaseChangeLog>
