@@ -1,6 +1,7 @@
 package com.sonns.infratructures.shared;
 
 import com.sonns.business.dto.FollowRequest;
+import com.sonns.business.dto.proxy.UserFollowResponseProxy;
 import com.sonns.business.repo.FollowRepo;
 import com.sonns.infratructures.mapper.FollowMapper;
 import com.sonns.infratructures.model.DeletedStatus;
@@ -9,6 +10,7 @@ import com.sonns.infratructures.repository.FollowsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -36,5 +38,10 @@ public class FollowRepoImpl implements FollowRepo {
     public Integer countFollow(String userId) {
         Integer count = followsRepository.countByFolloweeIdAndDeleted(userId, DeletedStatus.ACTIVE);
         return count;
+    }
+
+    @Override
+    public List<UserFollowResponseProxy> getFollower(String userId) {
+        return followsRepository.findAlUserFollower(userId);
     }
 }

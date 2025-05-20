@@ -1,11 +1,15 @@
 package com.sonns.application.controller;
 
 import com.sonns.business.dto.FollowRequest;
+import com.sonns.business.dto.proxy.UserFollowResponseProxy;
 import com.sonns.business.services.FollowService;
+import com.sonns.common.base.BaseResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/follow")
@@ -31,15 +35,10 @@ public class FollowController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping(value = "/follower")
-    public ResponseEntity<String> follower() {
-//        boolean response = postsService.createPost(postRequest);
-//        if (response) {
-        return ResponseEntity.ok("User registered successfully.");
-//        } else {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body("Failed to create post.");
-//        }
+    @GetMapping(value = "/follower/{userId}")
+    public ResponseEntity<BaseResponse<List<UserFollowResponseProxy>>> follower(@PathVariable String userId) {
+        List<UserFollowResponseProxy> response = followService.getFollower(userId);
+        return ResponseEntity.ok(BaseResponse.success(response));
     }
 
     @GetMapping(value = "/following")
