@@ -11,4 +11,5 @@ public interface FollowService {
     Boolean follow(FollowRequest request);
     Integer countFollow(String userId);
     List<UserFollowResponseProxy> getFollower(String userId);
+    List<UserFollowResponseProxy> getFollowing(String userId);
 }

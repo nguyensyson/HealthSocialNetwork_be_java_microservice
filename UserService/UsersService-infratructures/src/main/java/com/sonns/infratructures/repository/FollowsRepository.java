@@ -26,4 +26,14 @@ public interface FollowsRepository extends JpaRepository<Follows, String> {
         AND f.followeeId = :userId
     """)
     List<UserFollowResponseProxy> findAlUserFollower(String userId);
+
+    @Query("""
+        SELECT 
+            u.fullName
+        FROM Follows f
+        INNER JOIN Users u ON u.id = f.followeeId
+        WHERE f.deleted = 'ACTIVE'
+        AND f.followerId = :userId
+    """)
+    List<UserFollowResponseProxy> findAlUserFollowing(String userId);
 }

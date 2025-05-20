@@ -44,4 +44,9 @@ public class FollowRepoImpl implements FollowRepo {
     public List<UserFollowResponseProxy> getFollower(String userId) {
         return followsRepository.findAlUserFollower(userId);
     }
+
+    @Override
+    public List<UserFollowResponseProxy> getFollowing(String userId) {
+        return followsRepository.findAlUserFollowing(userId);
+    }
 }

@@ -41,14 +41,9 @@ public class FollowController {
         return ResponseEntity.ok(BaseResponse.success(response));
     }
 
-    @GetMapping(value = "/following")
-    public ResponseEntity<String> following() {
-//        boolean response = postsService.createPost(postRequest);
-//        if (response) {
-        return ResponseEntity.ok("User registered successfully.");
-//        } else {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body("Failed to create post.");
-//        }
+    @GetMapping(value = "/following/{userId}")
+    public ResponseEntity<BaseResponse<List<UserFollowResponseProxy>>> following(@PathVariable String userId) {
+        List<UserFollowResponseProxy> response = followService.getFollowing(userId);
+        return ResponseEntity.ok(BaseResponse.success(response));
     }
 }

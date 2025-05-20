@@ -26,6 +26,11 @@ public class FollowServiceImpl implements FollowService {
     }
 
     @Override
+    public List<UserFollowResponseProxy> getFollowing(String userId) {
+        return followRepo.getFollowing(userId);
+    }
+
+    @Override
     public Boolean follow(FollowRequest request) {
         return followRepo.follow(request);
     }
