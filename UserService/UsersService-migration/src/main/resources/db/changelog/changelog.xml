@@ -8,4 +8,8 @@
         <sqlFile dbms="mysql" path="classpath:/db/sources/V1_202505181614_CREATE_TABLE_FOLLOWS.sql" relativeToChangelogFile="false"/>
     </changeSet>
 
+    <changeSet author="son.nguyen" id="V1_20250720_ADD_FIRST_NAME_LAST_NAME_TABLE_USERS" onValidationFail="MARK_RAN">
+        <sqlFile dbms="mysql" path="classpath:db/sources/V1_20250720_ADD_FIRST_NAME_LAST_NAME_TABLE_USERS.SQL" relativeToChangelogFile="false"/>
+    </changeSet>
+
 </databaseChangeLog>

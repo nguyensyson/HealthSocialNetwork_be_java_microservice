@@ -3,8 +3,6 @@ package com.sonns.infratructures.repository;
 import com.sonns.business.dto.proxy.UserFollowResponseProxy;
 import com.sonns.infratructures.model.DeletedStatus;
 import com.sonns.infratructures.model.Follows;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -19,7 +17,8 @@ public interface FollowsRepository extends JpaRepository<Follows, String> {
 
     @Query("""
         SELECT 
-            u.fullName
+            u.firstName,
+            u.lastName
         FROM Follows f
         INNER JOIN Users u ON u.id = f.followerId
         WHERE f.deleted = 'ACTIVE'
@@ -29,7 +28,8 @@ public interface FollowsRepository extends JpaRepository<Follows, String> {
 
     @Query("""
         SELECT 
-            u.fullName
+            u.firstName,
+            u.lastName
         FROM Follows f
         INNER JOIN Users u ON u.id = f.followeeId
         WHERE f.deleted = 'ACTIVE'

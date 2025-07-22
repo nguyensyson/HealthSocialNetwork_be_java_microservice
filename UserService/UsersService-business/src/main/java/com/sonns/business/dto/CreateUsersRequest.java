@@ -1,14 +1,14 @@
-package sme.hub.business.dto;
+package com.sonns.business.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class CreateUsersRequest {
     @NotBlank
     private String firstName;
@@ -24,8 +24,8 @@ public class CreateUsersRequest {
     private String username;
 
     @NotBlank
-    private String password;
+    private String phone;
 
     @NotBlank
-    private String phone;
+    private String keycloakId;
 }

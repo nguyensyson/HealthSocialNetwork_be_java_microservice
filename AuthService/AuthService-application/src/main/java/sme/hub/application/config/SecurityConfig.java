@@ -21,9 +21,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorizeRequests ->{
                     securityProperties.getPermit().forEach(api ->
-                        api.getMethods().forEach(method ->
-                            authorizeRequests.requestMatchers(HttpMethod.valueOf(method), api.getPath()).permitAll()
-                        )
+                            authorizeRequests.requestMatchers(api.getPath()).permitAll()
                     );
                     authorizeRequests.anyRequest().authenticated();
                 })

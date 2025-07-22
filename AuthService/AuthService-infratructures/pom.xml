@@ -35,10 +35,18 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>sme.hub</groupId>
             <artifactId>AuthService-business</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>sme.hub</groupId>
+            <artifactId>AuthService-common</artifactId>
         </dependency>
     </dependencies>
 </project>

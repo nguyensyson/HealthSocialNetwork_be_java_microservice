@@ -18,6 +18,5 @@ public class SecurityProperties {
     @Setter
     public static class ApiPath {
         private String path;
-        private List<String> methods;
     }
 }

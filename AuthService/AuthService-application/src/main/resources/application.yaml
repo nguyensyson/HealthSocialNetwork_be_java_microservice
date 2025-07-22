@@ -2,7 +2,7 @@ spring:
   application:
     name: AuthService-application
   datasource:
-    url: jdbc:mysql://localhost:3306/pro_be_auth
+    url: jdbc:mysql://localhost:3306/health_social_user
     username: root
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -27,16 +27,19 @@ logging:
 
 server:
   port: 8091
+  servlet:
+    context-path: /auth/api/v1
 
 keycloak:
-  realm: SonNS_realm
+  realm: social_network
   server-url: http://localhost:8080
-  client-id: quan_ly_ke_toan
-  client-secret: 2hew13lEtOYUIlvA6sGuhuEZrpO8eYHz
+  client-id: auth_service
+  client-secret: mtvscitszPFSgTnVH6a2Q008JDKP4lCZ
 
 url:
   permit:
-    - path: "api/v1/register"
-      methods: ["POST"]
-    - path: "api/v1/logout"
-      methods: [ "POST" ]
+    - path: "/register"
+    - path: "/logout"
+
+user-client:
+  url: http://localhost:8082/users/api/v1
