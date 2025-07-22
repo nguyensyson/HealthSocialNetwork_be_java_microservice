@@ -15,5 +15,5 @@ public interface UserClient {
     void createUserProfile(@RequestBody CreateUserProfileParam param);
 
     @GetMapping(value = "/user", consumes = MediaType.APPLICATION_JSON_VALUE)
-    UserProfileResponse getUserProfile(@RequestParam("userId") String userId);
+    UserProfileResponse getUserProfile(@RequestParam("keycloakId") String keycloakId);
 }

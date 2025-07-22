@@ -1,6 +1,7 @@
 package com.sonns.business.services.impl;
 
 import com.sonns.business.dto.CreateUsersRequest;
+import com.sonns.business.dto.UserProfileResponse;
 import com.sonns.business.repo.UserRepo;
 import com.sonns.business.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -16,5 +17,10 @@ public class UserServiceImpl implements UserService {
     public Boolean createUser(CreateUsersRequest user) {
         userRepo.createUser(user);
         return true;
+    }
+
+    @Override
+    public UserProfileResponse getUserByKeycloakId(String keycloakId) {
+        return userRepo.getUserByKeycloakId(keycloakId);
     }
 }

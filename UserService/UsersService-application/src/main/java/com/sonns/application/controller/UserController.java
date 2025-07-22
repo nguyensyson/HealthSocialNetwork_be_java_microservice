@@ -2,6 +2,7 @@ package com.sonns.application.controller;
 
 import com.sonns.business.dto.CreateUsersRequest;
 import com.sonns.business.dto.FollowRequest;
+import com.sonns.business.dto.UserProfileResponse;
 import com.sonns.business.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,14 +28,9 @@ public class UserController {
     }
 
     @GetMapping()
-    public ResponseEntity<String> getUserProfile() {
-//        boolean response = postsService.createPost(postRequest);
-//        if (response) {
-        return ResponseEntity.ok("User registered successfully.");
-//        } else {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body("Failed to create post.");
-//        }
+    public ResponseEntity<UserProfileResponse> getUserProfileByKeycloakId(@RequestParam("keycloakId") String keycloakId) {
+        UserProfileResponse response = userService.getUserByKeycloakId(keycloakId);
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping()
