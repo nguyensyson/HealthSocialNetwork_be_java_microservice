@@ -41,6 +41,10 @@
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.sonns.business</groupId>
@@ -54,6 +58,7 @@
             <groupId>com.sonns.common</groupId>
             <artifactId>UsersService-common</artifactId>
         </dependency>
+
     </dependencies>
 
 </project>
