@@ -14,7 +14,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
-      - keycloak-network
+      - sonns-network
 
   keycloak:
     image: quay.io/keycloak/keycloak:22.0.5
@@ -36,12 +36,14 @@ services:
     depends_on:
       - mysql
     networks:
-      - keycloak-network
+      - sonns-network
   zookeeper:
     image: wurstmeister/zookeeper
     container_name: zookeeper-social-network
     ports:
       - "2181:2181"
+    networks:
+      - sonns-network
 
   kafka:
     container_name: kafka-social-network
@@ -56,6 +58,8 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
     depends_on:
       - zookeeper
+    networks:
+      - sonns-network
 
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
@@ -68,6 +72,8 @@ services:
       - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
     depends_on:
       - kafka
+    networks:
+      - sonns-network
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.10.2
     container_name: elasticsearch-social-network
@@ -88,7 +94,7 @@ services:
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
     networks:
-      - elk
+      - sonns-network
 
   kibana:
     image: docker.elastic.co/kibana/kibana:8.10.2
@@ -100,7 +106,7 @@ services:
     depends_on:
       - elasticsearch
     networks:
-      - elk
+      - sonns-network
 
   logstash:
     image: docker.elastic.co/logstash/logstash:8.10.0
@@ -111,7 +117,7 @@ services:
     volumes:
       - ./logstash/pipeline:/usr/share/logstash/pipeline
     networks:
-      - elk
+      - sonns-network
     command: >
       bash -c "
         echo '
@@ -130,9 +136,8 @@ services:
         ' > /usr/share/logstash/pipeline/logstash.conf && /usr/local/bin/docker-entrypoint"
 
   api-gateway:
-    build:
-      context: ./api-gateway
-      dockerfile: Dockerfile
+    build: ./api-gateway
+    image: siwson/social_network_api_gateway:latest
     container_name: api-gateway
     ports:
       - "8888:8080"
@@ -140,34 +145,35 @@ services:
       - auth-service
       - user-service
     networks:
-      - elk
-      - keycloak-network
+      - sonns-network
+    volumes:
+      - ./docker/libs/opentelemetry-javaagent.jar:/opentelemetry-javaagent.jar
 
   auth-service:
-    build:
-      context: ./AuthService/AuthService-application
-      dockerfile: Dockerfile
+    build: ./AuthService/AuthService-application
+    image: siwson/social_network_auth_service:latest
     container_name: auth-service
     ports:
       - "8091:8080"
     depends_on:
       - mysql
     networks:
-      - elk
-      - keycloak-network
+      - sonns-network
+    volumes:
+      - ./docker/libs/opentelemetry-javaagent.jar:/opentelemetry-javaagent.jar
 
   user-service:
-    build:
-      context: ./UserService/UsersService-application
-      dockerfile: Dockerfile
+    build: ./UserService/UsersService-application
+    image: siwson/social_network_user_service:latest
     container_name: user-service
     ports:
       - "8082:8080"
     depends_on:
       - mysql
     networks:
-      - elk
-      - keycloak-network
+      - sonns-network
+    volumes:
+      - ./docker/libs/opentelemetry-javaagent.jar:/opentelemetry-javaagent.jar
 
 
 volumes:
@@ -175,6 +181,6 @@ volumes:
   elasticsearch_data:
 
 networks:
-  keycloak-network:
-  elk:
+  sonns-network:
     driver: bridge
+    name: sonns-network
