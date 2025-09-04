@@ -34,7 +34,7 @@ keycloak:
   realm: social_network
   server-url: http://localhost:8080
   client-id: auth_service
-  client-secret: mtvscitszPFSgTnVH6a2Q008JDKP4lCZ
+  client-secret: Y8RE1aP7ur5inScS5rGcI482a8cKUqel
 
 url:
   permit:
